@@ -12,7 +12,7 @@ Web セキュリティ学習の writeup 集約リポジトリ。
 | Lab | カテゴリ | 難易度 | Status |
 |-----|----------|--------|--------|
 | [Unprotected admin functionality](portswigger/access-control/unprotected-admin-functionality.md) | Broken Access Control | Apprentice | ✅ Solved |
-| [unprotected-admin-functionality-with-unpredictable-url](portswigger/access-control/unprotected-admin-functionality-with-unpredictable-url.md) | Broken Access Control | Apprentice | ✅ Solved |
+| [Unprotected-admin-functionality-with-unpredictable-url](portswigger/access-control/unprotected-admin-functionality-with-unpredictable-url.md) | Broken Access Control | Apprentice | ✅ Solved |
 
 <!-- 新しい writeup を追加したらこの表に1行足す -->
 
