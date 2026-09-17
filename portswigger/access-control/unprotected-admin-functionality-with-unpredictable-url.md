@@ -36,28 +36,32 @@ status: Solved
 トップページのHTMLソース（またはDevTools）を確認し、管理パネルへのリンクを生成している
 JavaScript を発見。ロール判定のコード内に管理パネルのURLがベタ書きされていた。
 ```html
-<!-- 実際に見つけたスクリプト該当箇所を貼る -->
 <script>
 var isAdmin = false;
 if (isAdmin) {
-    var adminPanelTag = document.createElement('a');
-    adminPanelTag.setAttribute('href', '/admin-XXXXXX');  <!-- ← 実際の値に置き換え -->
-    ...
+   var topLinksTag = document.getElementsByClassName("top-links")[0];
+   var adminPanelTag = document.createElement('a');
+   adminPanelTag.setAttribute('href', '/admin-n8sf5s');
+   adminPanelTag.innerText = 'Admin panel';
+   topLinksTag.append(adminPanelTag);
+   var pTag = document.createElement('p');
+   pTag.innerText = '|';
+   topLinksTag.appendChild(pTag);
 }
 </script>
 ```
 
 ### 2. 直接アクセス
 JSから読み取ったパスをURLに直接指定してアクセスした。
-- アクセスしたURL: `https://<lab-id>.web-security-academy.net/admin-XXXXXX`  <!-- 実際の値に置き換え -->
+- アクセスしたURL: `https://<lab-id>.web-security-academy.net/admin-n8sf5s` 
 - 結果: 認可チェックが無く、管理パネルが表示された
 
 ### 3. 権限昇格の実証 (Exploit)
-- 実行した操作: 管理パネル上のユーザー削除機能で対象ユーザーを削除
+- 実行した操作: 管理パネル上のユーザー削除機能で対象ユーザー(Carlos）を削除
 - 結果: ラボが Solved になり、垂直権限昇格が成立することを確認
 
 ## 根本原因
-URLを推測困難にする「隠蔽」に依存し、`/admin-XXXXXX` エンドポイントに
+URLを推測困難にする「隠蔽」に依存し、`/admin-n8sf5s` エンドポイントに
 **サーバー側の認可チェックが無かったこと**が本質。さらに、秘密であるべきURLを
 クライアント側JavaScriptに含めたことで、隠蔽そのものも成立していなかった。
 
